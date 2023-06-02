@@ -1,14 +1,14 @@
 # Generalized Inverse Normal (GIN) distribution
-The GIN package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
+<img src="https://github.com/smonto2/GIN/blob/2a8ea5ecca0771a072a1d7829404e1546fb2f874/GIN.png" width="300">
+
+The GIN package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is supported on the entire real line $(-\infty, \infty)$ and takes three parameters:
+- $\alpha > 1$, a degrees-of-freedom parameter,
+- $\mu \in (-\infty, \infty)$, similar to a location parameter, it shifts the density of the distribution left and right,
+- $\tau > 0$, similar to a scale parameter, it spreads the density of the distribution.
 
 This package is the first to provide an efficient sampling algorithm for drawing from the GIN distribution. We provide similar routines for the GIN distribution truncated to the positive or negative reals. Further details of the distribution, theoretical guarantees and pseudo-code for the sampling algorithms, as well as an application to Bayesian estimation of network formation models can be found in [Ding, Estrada and Montoya-Blandón (2023)](#1).
 
 ## Routines
-
-The GIN distribution is supported on the entire real line $(-\infty, \infty)$ and takes three parameters:
-- $\alpha > 1$, a degrees-of-freedom parameter,
-- $\mu \in (-\infty, \infty)$, similar to a location parameter, it shifts the density of the distribution left and right,
-- $\tau > 0$, similar to a scale parameter, it spreads the density of the distribution.
 
 Provided with the package are four main routines:
 1. `dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)`
@@ -36,8 +36,8 @@ where $`{}_1F_1(a, b; x)`$ is the [confluent hypergeometric function](https://ma
 $$f_{Z^{+}}(z) = \frac{g(z; \alpha, \mu, \tau)}{C^{+}(\alpha, \mu, \tau)} \mathbb{I}(z > 0)$$
 $$f_{Z^{-}}(z) = \frac{g(z; \alpha, \mu, \tau)}{C^{-}(\alpha, \mu, \tau)} \mathbb{I}(z < 0)$$
 with proportionality constants
-$$C^{-}(\alpha, \mu) = e^{-\frac{\mu^2}{4}} \Gamma(\alpha - 1) D_{-(\alpha-1)}(-\mu)$$
-$$C^{+}(\alpha, \mu) = e^{-\frac{\mu^2}{4}} \Gamma(\alpha - 1) D_{-(\alpha-1)}(\mu)$$
+$$C^{-}(\alpha, \mu, \tau) = \exp\left(-\frac{\mu^2}{4\tau^2} \right) \Gamma(\alpha - 1) D_{-(\alpha-1)}\left(-\frac{\mu}{\tau} \right)$$
+$$C^{+}(\alpha, \mu, \tau) = \exp\left(-\frac{\mu^2}{4\tau^2} \right) \Gamma(\alpha - 1) D_{-(\alpha-1)}\left(\frac{\mu}{\tau} \right)$$
 where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument is true and 0 otherwise, and $D_\nu(x)$ is the [parabolic cylinder function](https://mathworld.wolfram.com/ParabolicCylinderFunction.html).
 
 ## Random variable generation
@@ -48,11 +48,13 @@ where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument 
 
 ## Digression: Difference between GIN and GIG distributions
 
-<a id="digression"> </a> While the kernels &mdash; and therefore the sampling techniques &mdash; for the GIN and GIG distribution are similar, these two distribution share some important differences. The main is their conceptualization, as they both attempt to generalize the idea of an inverse normal distribution in different ways. The GIG distribution does so by choosing cumulants that are inverses to those of the normal distribution. The GIN distribution does so by directly using the density of the reciprocal after a change of variables. Another important difference comes from their use as conjugate priors in Bayesian analysis:
+<a id="digression"> </a> The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming. While the kernels &mdash; and therefore the sampling techniques &mdash; for the GIN and GIG distribution are similar, these two distribution share some important differences. The main is their conceptualization, as they both attempt to generalize the idea of an inverse normal distribution in different ways. The GIG distribution does so by choosing cumulants that are inverses to those of the normal distribution. The GIN distribution does so by directly using the density of the reciprocal after a change of variables.
+
+Another important difference comes from their use as conjugate priors in Bayesian analysis:
 - $\theta \sim \text{GIN}(\alpha, \mu, \tau)$ is the conjugate prior if observations are random samples from $Y \sim \text{Normal}(\theta \delta, \theta^2)$
 - $\theta \sim \text{GIG}(\alpha, \mu, \tau)$ is the conjugate prior if observations are random samples from $Y \sim \text{Normal}(\theta \delta, \theta)$
 
-These are similar mixture models but carry different interpretations and thus require different posterior sampling algorithms. This interpretation also shows why the restriction of $\alpha \geq 2$ is not binding if the goal is to perform Bayesian analysis. A prior $\gamma \sim \text{GIN}(\alpha_0, \mu_0, \tau_0)$ with $\alpha_0 = 1 + \varepsilon$ is non-informative when $\varepsilon > 0$ is arbitrarily small. However, the posterior distribution will have degrees-of-freedom parameter $\alpha_N = N + 1 + \varepsilon$ where $N$ is the sample size. As $N \geq 1$ implies $\alpha_N > 2$, for a Bayesian analysis we always need to draw from the GIN distribution with $\alpha > 2$.
+These are similar mixture models, but carry different interpretations and thus require different posterior sampling algorithms. This interpretation also shows why the restriction of $\alpha \geq 2$ is not binding if the goal is to perform Bayesian analysis. A prior $\theta \sim \text{GIN}(\alpha_0, \mu_0, \tau_0)$ with $\alpha_0 = 1 + \varepsilon$ is non-informative when $\varepsilon > 0$ is arbitrarily small. The posterior distribution will be $\theta|Y \sim \text{GIN}(\alpha_N, \mu_N, \tau_N)$ with posterior degrees-of-freedom parameter $\alpha_N = N + 1 + \varepsilon$ where $N$ is the sample size. As $N \geq 1$ implies $\alpha_N > 2$, then for a Bayesian analysis with at least one observation we always need to draw from the GIN distribution with $\alpha > 2$.
 
 ## References
 1. <a id="1"> [Ding, C., Estrada, J., and Montoya-Blandón, S. (2023). Bayesian Inference of Network Formation Models with Payoff Externalities. Working Paper.](https://www.smontoyablandon.com/publication/networks/network_externalities.pdf) </a>
