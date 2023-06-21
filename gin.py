@@ -89,6 +89,7 @@ def rtgin1(a, m, sign, algo = True, verbose = False):
     # If sign = True, draw from the positive region Z > 0
     # If sign = False, draw from the negative region Z < 0
     # Compute necessary values for ratio-of-uniforms method
+    # max_iter: Maximum number of iterations in case sampler gets stuck
     if (sign):
         mode = (-m + np.sqrt(m**2 + 4*a))/(2*a)
         mult = -1
@@ -112,12 +113,16 @@ def rtgin1(a, m, sign, algo = True, verbose = False):
     # Acceptance-Rejection algorithm (ratio-of-uniforms)
     test = False
     counter = 0
-    while not test:
+    max_iter = 100
+    while (not test) & (counter <= max_iter):
         u = stats.uniform.rvs(uvals[0], uvals[1] - uvals[0], size = 1)[0]
         v = stats.uniform.rvs(0, vmax, size = 1)[0]
         x = (u/v) + mode
         test = (2*np.log(v) <= dgin1(x, a, m, True, True)) & (-mult*x > 0)
         counter += 1
+    if counter > max_iter:
+        x = mode # Return mode if no good candidate is found
+        warning: "No candidate draw found for these parameter values. Giving up an returning the mode of the distribution"
     if verbose:
         return {'value': x, 'ARiters': counter}
     else:
