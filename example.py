@@ -21,9 +21,9 @@ z_vals = np.linspace(-5, 5, 200)
 fz_unc = np.array([gin.dgin(z, a, m, t, False) for z in z_vals])
 fz_p = np.array([gin.dtgin(z, a, m, t, True, False) for z in z_vals])
 fz_n = np.array([gin.dtgin(z, a, m, t, False, False) for z in z_vals])
-z_unc = gin.rgin(n_draws, a, m, t, True)
-z_p = gin.rtgin(n_draws, a, m, t, True)
-z_n = gin.rtgin(n_draws, a, m, t, False)
+z_unc = gin.rgin(n_draws, a, m, t, 'hormann')
+z_p = gin.rtgin(n_draws, a, m, t, True, 'hormann')
+z_n = gin.rtgin(n_draws, a, m, t, True, 'leydold')
 
 # Full density on real line
 plt.figure()
