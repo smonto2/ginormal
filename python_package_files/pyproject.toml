@@ -1,0 +1,34 @@
+# Build system for the package (setuptools)
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# Package metadata
+[project]
+name = "ginormal"
+version = "0.0.1"
+requires-python = ">=3.8"
+description = "Generalized Inverse Normal (GIN) distribution density and generation"
+readme = "README.md"
+authors = [
+  { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" },
+  { name = "Cheng Ding", email = "cheng.ding.emory@gmail.com"},
+  { name = "Juan Estrada", email = "jjestra@emory.edu"},
+  { name = "Zhilang Xia"}
+]
+maintainers = [
+  { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" }
+]
+dependencies = ["numpy", "scipy", "cardano_method"]
+classifiers = [
+    "Programming Language :: Python :: 3.8", # "Programming Language" represents the top-level category, "Python" represents the second-level category, and "3.8" represents the third-level category.
+	"License :: OSI Approved :: MIT License",
+	"Operating System :: OS Independent",    # The software package is not dependent on any specific operating system
+]
+keywords = ["statistics", "distribution", "generalized inverse normal", "random variable generation"]
+
+[project.urls]
+"Homepage" = "https://github.com/smonto2/GIN"
+
+[tool.setuptools]
+packages = ["ginormal"]
