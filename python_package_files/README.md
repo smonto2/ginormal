@@ -1,5 +1,5 @@
 # Generalized Inverse Normal (GIN) distribution
-The GIN package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
+The `ginormal` package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
 
 This package is the first to provide an efficient sampling algorithm for drawing from the GIN distribution. We provide similar routines for the GIN distribution truncated to the positive or negative reals. Further details of the distribution, theoretical guarantees and pseudo-code for the sampling algorithms, as well as an application to Bayesian estimation of network formation models can be found in [Ding, Estrada and Montoya-Blandón (2023)](#1).
 
@@ -20,9 +20,9 @@ The first two compute the densities and the last two are used for random number 
 - `log`, should the logarithm of the density be returned? Defaults to `TRUE`.
 - `quasi`, should the value of the kernel (or quasi-density) be returned? Defaults to `FALSE`.
 
-Generation routines take the same parameters but require a `size` argument determining the amount of random variates to generate. These routines only admit a parameter `alpha` larger than 2. They take an additional argument `algo`, which can be either `"hormann"` or `"leydold"`, and defaults to `"hormann"` as our prefered method. See [below for details](#random-variable-generation) on both points.
+Generation routines take the same parameters but require a `size` argument determining the amount of random variates to generate. These routines only admit a parameter `alpha` larger than 2. They take an additional argument `algo`, which can be either `"hormann"` or `"leydold"`, and defaults to `"hormann"` as our prefered method. See [below for details](#rvgeneration) on both points.
 
-Those routines including "`t`" in their name work for the truncated variants. They take an additional logical argument `sign`, where `sign = TRUE` implies truncation to positive numbers and `sign = FALSE` to negative numbers.
+Those routines including "`t`" in their name work for the truncated variants. They take an additional logical argument `sign`, where `sign = TRUE` implies truncation to positive numbers $(z > 0)$ and `sign = FALSE` to negative numbers $(z < 0)$.
 
 ## Density functions
 
@@ -42,7 +42,7 @@ where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument 
 
 ## Random variable generation
 
-[Ding, Estrada and Montoya-Blandón (2023)](#1) provide an efficient sampling algorithm for the GIN distribution and its truncated variants for the case of $\alpha > 2$. This restriction is not of concern if the goal is the perform Bayesian estimation using this distribution (see [below for more details](#digression) and Remark 2 in the paper). Generation is done using the ratio-of-uniforms method with mode shift ([Kinderman and Monahan, 1977](#4)), which requires the computation of the minimal bounding rectangle. We implement two alternatives found in the literature:
+<a id="rvgeneration"> </a> [Ding, Estrada and Montoya-Blandón (2023)](#1) provide an efficient sampling algorithm for the GIN distribution and its truncated variants for the case of $\alpha > 2$. This restriction is not of concern if the goal is the perform Bayesian estimation using this distribution (see [below for more details](#digression) and Remark 2 in the paper). Generation is done using the ratio-of-uniforms method with mode shift ([Kinderman and Monahan, 1977](#4)), which requires the computation of the minimal bounding rectangle. We implement two alternatives found in the literature:
 1. [Leydold (2001)](#5) that requires information on the proportionality constants.
 2. [Hörmann and Leydold (2014)](#6) that requires solving a cubic equation. This is our prefered method and the default in the package.
 

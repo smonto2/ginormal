@@ -1,3 +1,0 @@
-numpy
-scipy
-cardano_method

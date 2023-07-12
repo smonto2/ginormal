@@ -1,12 +1,12 @@
-# Build system for the package (setuptools)
+# Build system for the package
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 # Package metadata
 [project]
 name = "ginormal"
-version = "0.0.1"
+version = "0.0.2"
 requires-python = ">=3.8"
 description = "Generalized Inverse Normal (GIN) distribution density and generation"
 readme = "README.md"
@@ -14,7 +14,7 @@ authors = [
   { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" },
   { name = "Cheng Ding", email = "cheng.ding.emory@gmail.com"},
   { name = "Juan Estrada", email = "jjestra@emory.edu"},
-  { name = "Zhilang Xia"}
+  { name = "Zhilang Xia", email = "zhilang.xia@glasgow.ac.uk"}
 ]
 maintainers = [
   { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" }
@@ -29,6 +29,7 @@ keywords = ["statistics", "distribution", "generalized inverse normal", "random 
 
 [project.urls]
 "Homepage" = "https://github.com/smonto2/GIN"
+"Bug tracking" = "https://github.com/smonto2/GIN/issues"
 
-[tool.setuptools]
-packages = ["ginormal"]
+[tool.hatch.build.targets]
+packages = ["src/ginormal"]
