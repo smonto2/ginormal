@@ -16,7 +16,7 @@ Provided with the package are four main routines:
 3. `rgin(size, alpha, mu, tau, algo)`
 4. `rtgin(size, alpha, mu, tau, sign, algo)`
 
-The first two compute the densities and the last two are used for random number generation. Density routines take in the quantile `z`, parameters, and two optional logical arguments:
+The first two compute the densities and the last two are used for random number generation. Density routines take in the quantile `z`; parameters `alpha`, `mu` and `tau`; and two optional logical arguments:
 - `log`, should the logarithm of the density be returned? Defaults to `TRUE`.
 - `quasi`, should the value of the kernel (or quasi-density) be returned? Defaults to `FALSE`.
 
