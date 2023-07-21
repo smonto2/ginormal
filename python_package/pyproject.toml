@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 name = "ginormal"
 version = "0.0.3"
 requires-python = ">=3.8"
-description = "Generalized Inverse Normal (GIN) distribution density and generation"
+description = "Generalized Inverse Normal distribution density and generation"
 readme = "README.md"
 authors = [
   { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" },
