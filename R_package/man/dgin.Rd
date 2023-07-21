@@ -2,27 +2,34 @@
 % Please edit documentation in R/dgin.R
 \name{dgin}
 \alias{dgin}
-\title{Title General density with tau from (0, infinity)}
+\title{Density for the generalized inverse normal distribution}
 \usage{
-dgin(z, a, m, t, log = TRUE, quasi = FALSE)
+dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)
 }
 \arguments{
-\item{z}{real number (Distribution is supported on real line, z can be any real number.Currently, only scalar z is supported. Density is set to be 0 at z = 0.)}
+\item{z}{quantile.}
 
-\item{a}{a degrees-of-freedom parameter}
+\item{alpha}{degrees-of-freedom parameter.}
 
-\item{m}{similar to a location parameter, it shifts the density of the distribution left and right}
+\item{mu}{similar to location parameter, controls asymmetry of the distribution.}
 
-\item{t}{real number > 0 (Similar to scale parameter, controls spread of the distribution.)}
+\item{tau}{similar to scale parameter, controls spread of the distribution.}
 
-\item{log}{boolean, optional(Should the log of the density be returned? Default is True.)}
+\item{log}{logical; should the log of the density be returned? Defaults to TRUE.}
 
-\item{quasi}{boolean, optional(The quasi-density or kernel is the density without the normalization constant.
-Should the quasi-density value be returned? Default is False.)}
+\item{quasi}{logical; should the quasi-density value be returned? Defaults to FALSE.}
 }
 \value{
-dgin
+Numeric scalar with density.
 }
 \description{
-Title General density with tau from (0, infinity)
+Density for the generalized inverse normal distribution
+}
+\details{
+Currently, only scalars are supported for the quantile and parameter values.
+Density is supported on the entire real line, `z` and `mu` can take any value
+in $(-\\infty, \\infty)$. Density is only defined for parameter values
+`alpha`${} > 1$ or `tau`${} > 0$, so it is set to 0 outside of these values.
+The quasi-density or kernel is the density without the normalization constant,
+use `quasi = TRUE` for this behavior.
 }

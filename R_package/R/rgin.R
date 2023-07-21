@@ -1,33 +1,35 @@
-#' Title Generator of generalized inverse normal variables
+#' Generating random numbers from the generalized inverse normal distribution
 #'
-#' @param size integer (Number of desired draws. Output is numpy vector of length equal to size.)
-#' @param a a degrees-of-freedom parameter,
-#' @param m similar to a location parameter, it shifts the density of the distribution left and right
-#' @param t similar to a scale parameter, it spreads the density of the distribution
-#' @param algo They take an additional argument algo, which can be either "hormann" or "leydold", and defaults to "hormann"
-#' @return rgin
+#' @inheritParams rtgin
+#' @details
+#' Currently, only values of alpha > 2 are supported. For Bayesian posterior sampling,
+#' alpha is always larger than 2 even for non-informative priors. The algorithm requires
+#' calculating the probability of truncation region (either z < 0 or z > 0). It is more stable
+#' to compute a probability bounded away from 0. As mu controls asymmetry,
+#' when mu > 0, P(truncation region) = P(z>0) >= 50%, and this probability is computed.
+#' If mu < 0, P(z<0) >= 50% and this region's probability is used.
+#'
+#' @return Numeric vector of length `size`.
 #' @export rgin
-#'
-#' @examples
-#' rgin(1000, 5, 0, 1, algo=TRUE)
-rgin <- function(size, a, m, t, algo='hormann'){
-  if(a <= 2) {
-    stop("alpha should be greater than 2")}
-  if(t <= 0) {
-    stop("tau should be greater than 0")}
-  if(algo == 'hormann') {
-    algo_1 <- TRUE
-  } else if(algo == 'leydold') {
-    algo_1 <- FALSE
-  } else {
-    stop("algo should be either 'hormann' or 'leydold'")
-  }
-  sign = (m >= 0)
-  F0r = F0gin(a, m, t, sign)
-  res = rep(0,size)
-  side = (runif(size) <= F0r)
-  sum_side = sum(side)
-  res[side == 0] = rtgin(size - sum_side, a, m, t, !sign, algo)
-  res[side == 1] = rtgin(sum_side, a, m, t, sign, algo)
-  return(res)
+rgin <- function(size, alpha, mu, tau, algo = 'hormann'){
+    # Check parameter values (return error)
+    if (alpha <= 2) {
+        stop("alpha should be greater than 2")
+    }
+    if (tau <= 0) {
+        stop("tau should be greater than 0")
+    }
+    if ((algo != 'hormann') && (algo != 'leydold')) {
+        stop("algo should be either 'hormann' or 'leydold'")
+    }
+
+    # Generate using the algorithm for truncated variables
+    sign <- (mu >= 0)
+    F0r <- F0gin(alpha, mu, tau, sign)
+    res <- rep(0, size)
+    side <- (runif(size) <= F0r)
+    sum_side <- sum(side)
+    res[side == 0] <- rtgin(size - sum_side, alpha, mu, tau, !sign, algo)
+    res[side == 1] <- rtgin(sum_side, alpha, mu, tau, sign, algo)
+    return(res)
 }

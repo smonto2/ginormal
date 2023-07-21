@@ -2,29 +2,38 @@
 % Please edit documentation in R/dtgin.R
 \name{dtgin}
 \alias{dtgin}
-\title{Title}
+\title{Density for the generalized inverse normal distribution truncated to the positive or negative reals}
 \usage{
-dtgin(z, a, m, t, sign = TRUE, log = TRUE, quasi = FALSE)
+dtgin(z, alpha, mu, tau, sign = TRUE, log = TRUE, quasi = FALSE)
 }
 \arguments{
-\item{z}{real number (Distribution is supported on real line, z can be any real number.
-Currently, only scalar z is supported. Density is set to be 0 at z = 0.)}
+\item{z}{quantile.}
 
-\item{a}{real number > 1 (Degrees of freedom parameter. Function returns 0 density if a <= 1.)}
+\item{alpha}{degrees-of-freedom parameter.}
 
-\item{m}{similar to a location parameter, it shifts the density of the distribution left and right}
+\item{mu}{similar to location parameter, controls asymmetry of the distribution.}
 
-\item{t}{similar to a scale parameter, it spreads the density of the distribution}
+\item{tau}{similar to scale parameter, controls spread of the distribution.}
 
-\item{sign}{sign = TRUE implies truncation to positive numbers and sign = FALSE to negative numbers}
+\item{sign}{logical. `TRUE` implies truncation to positive numbers (`z` > 0)
+and `FALSE` to negative numbers (`z` < 0)}
 
-\item{log}{should the logarithm of the density be returned? Defaults to TRUE.}
+\item{log}{logical; should the log of the density be returned? Defaults to TRUE.}
 
-\item{quasi}{should the value of the kernel (or quasi-density) be returned? Defaults to FALSE}
+\item{quasi}{logical; should the quasi-density value be returned? Defaults to FALSE.}
 }
 \value{
-dtgin
+Numeric scalar with density.
 }
 \description{
-Title
+Density for the generalized inverse normal distribution truncated to the positive or negative reals
+}
+\details{
+Currently, only scalars are supported for the quantile and parameter values.
+Density is supported on the positive reals (`z` > 0) when `sign = TRUE` and to
+negative reals (`z` < 0) when `sign = FALSE`. `mu` can take any value
+in $(-\\infty, \\infty)$. Density is only defined for parameter values
+`alpha`${} > 1$ or `tau`${} > 0$, so it is set to 0 outside of these values.
+The quasi-density or kernel is the density without the normalization constant,
+use `quasi = TRUE` for this behavior.
 }

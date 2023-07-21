@@ -1,37 +1,47 @@
-#' Title General density with tau from (0, infinity)
+#' Density for the generalized inverse normal distribution
+#'
 #' @importFrom stats runif
-#' @param z real number (Distribution is supported on real line, z can be any real number.Currently, only scalar z is supported. Density is set to be 0 at z = 0.)
-#' @param a a degrees-of-freedom parameter
-#' @param m similar to a location parameter, it shifts the density of the distribution left and right
-#' @param t real number > 0 (Similar to scale parameter, controls spread of the distribution.)
-#' @param log boolean, optional(Should the log of the density be returned? Default is True.)
-#' @param quasi boolean, optional(The quasi-density or kernel is the density without the normalization constant.
-#' Should the quasi-density value be returned? Default is False.)
-#' @return dgin
+#' @param z quantile.
+#' @param alpha degrees-of-freedom parameter.
+#' @param mu similar to location parameter, controls asymmetry of the distribution.
+#' @param tau similar to scale parameter, controls spread of the distribution.
+#' @param log logical; should the log of the density be returned? Defaults to TRUE.
+#' @param quasi logical; should the quasi-density value be returned? Defaults to FALSE.
+#' @details
+#' Currently, only scalars are supported for the quantile and parameter values.
+#' Density is supported on the entire real line, `z` and `mu` can take any value
+#' in $(-\\infty, \\infty)$. Density is only defined for parameter values
+#' `alpha`${} > 1$ or `tau`${} > 0$, so it is set to 0 outside of these values.
+#' The quasi-density or kernel is the density without the normalization constant,
+#' use `quasi = TRUE` for this behavior.
+#'
+#' @return Numeric scalar with density.
 #' @export dgin
 
-dgin <- function(z, a, m, t, log=TRUE, quasi=FALSE){
-  if (a <= 1) {
-    warning("alpha should be greater than 1")
-  }
-  if (t <= 0) {
-    warning("tau should be greater than 0")
+dgin <- function(z, alpha, mu, tau, log=TRUE, quasi=FALSE){
+  # Check parameter values
+  if (alpha <= 1) {
+      warning("alpha should be greater than 1")
+      res <- -Inf
+  } else if (tau <= 0) {
+      warning("tau should be greater than 0")
+      res <- -Inf
+  } else if (z == 0) {
+      res <- -Inf
+  } else {
+      # Compute density
+      mt <- mu / tau
+      if (quasi == TRUE){
+          res <- dgin1(z * tau, alpha, mt, TRUE, TRUE) + alpha * log(tau)
+      } else {
+          res <- dgin1(z * tau, alpha, mt, TRUE, FALSE) + log(tau)
+      }
   }
 
-  if (t<=0){
-    res <- -Inf
-  }else{
-    mt <- m / t
-    if (quasi==TRUE){
-      res = dgin1(z * t, a, mt, TRUE, TRUE) + a * log(t)
-    }else{
-      res = dgin1(z * t, a, mt, TRUE, FALSE) + log(t)
-    }
-  }
-
-  if (log==TRUE){
-    return(res)
-  }else{
-    return(exp(res))
+  # Return
+  if (log == TRUE){
+      return(res)
+  } else {
+      return(exp(res))
   }
 }

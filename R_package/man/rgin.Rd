@@ -2,24 +2,34 @@
 % Please edit documentation in R/rgin.R
 \name{rgin}
 \alias{rgin}
-\title{Title Generator of generalized inverse normal variables}
+\title{Generating random numbers from the generalized inverse normal distribution}
 \usage{
-rgin(size, a, m, t, algo = TRUE)
+rgin(size, alpha, mu, tau, algo = "hormann")
 }
 \arguments{
-\item{size}{integer (Number of desired draws. Output is numpy vector of length equal to size.)}
+\item{size}{number of desired draws. Output is numpy vector of length equal to size)}
 
-\item{a}{a degrees-of-freedom parameter,}
+\item{alpha}{degrees-of-freedom parameter.}
 
-\item{m}{similar to a location parameter, it shifts the density of the distribution left and right}
+\item{mu}{similar to location parameter, controls asymmetry of the distribution.}
 
-\item{t}{similar to a scale parameter, it spreads the density of the distribution}
+\item{tau}{similar to scale parameter, controls spread of the distribution.}
 
-\item{algo}{They take an additional argument algo, which can be either "hormann" or "leydold", and defaults to "hormann"}
+\item{algo}{string with desired algorithm to compute minimal bounding rectangle.
+If "hormann", use the method from Hörmann and Leydold (2014). When "leydold", use the one from Leydold (2001).
+Defaults to "hormann" and returns an error for any other values.}
 }
 \value{
-rgin
+Numeric vector of length `size`.
 }
 \description{
-Title Generator of generalized inverse normal variables
+Generating random numbers from the generalized inverse normal distribution
+}
+\details{
+Currently, only values of alpha > 2 are supported. For Bayesian posterior sampling,
+alpha is always larger than 2 even for non-informative priors. The algorithm requires
+calculating the probability of truncation region (either z < 0 or z > 0). It is more stable
+to compute a probability bounded away from 0. As mu controls asymmetry,
+when mu > 0, P(truncation region) = P(z>0) >= 50%, and this probability is computed.
+If mu < 0, P(z<0) >= 50% and this region's probability is used.
 }

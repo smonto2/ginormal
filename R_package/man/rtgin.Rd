@@ -2,35 +2,41 @@
 % Please edit documentation in R/rtgin.R
 \name{rtgin}
 \alias{rtgin}
-\title{Title}
+\title{Generating random numbers from the generalized inverse normal distribution truncated to the positive or negative reals}
 \usage{
-rtgin(size, a, m, t, sign = TRUE, algo = TRUE, verbose = FALSE)
+rtgin(size, alpha, mu, tau, sign, algo, verbose = FALSE)
 }
 \arguments{
-\item{size}{integer
-(Number of desired draws. Output is numpy vector of length equal to size)}
+\item{size}{number of desired draws. Output is numpy vector of length equal to size)}
 
-\item{a}{real number > 2
-(Degrees of freedom parameter. Currently, only values of a > 2 are supported.m : real number)}
+\item{alpha}{degrees-of-freedom parameter.}
 
-\item{m}{real number (Similar to location parameter, controls asymmetry of the distribution.)}
+\item{mu}{similar to location parameter, controls asymmetry of the distribution.}
 
-\item{t}{similar to a scale parameter, it spreads the density of the distribution}
+\item{tau}{similar to scale parameter, controls spread of the distribution.}
 
-\item{sign}{where sign = TRUE implies truncation to positive numbers and sign = FALSE to negative numbers}
+\item{sign}{logical. `TRUE` implies truncation to positive numbers (`z` > 0)
+and `FALSE` to negative numbers (`z` < 0)}
 
-\item{algo}{boolean, optional
-algo = True, use the Minimal Bounding Rectangle from Hörmann and Leydold (2014)
-algo = False, use the one from Leydold (2001)
-Defaults to True.}
+\item{algo}{string with desired algorithm to compute minimal bounding rectangle.
+If "hormann", use the method from Hörmann and Leydold (2014). When "leydold", use the one from Leydold (2001).
+Defaults to "hormann" and returns an error for any other values.}
 
-\item{verbose}{boolean, optional
-Should the acceptance rate from the ratio-of-uniforms method be provided
-along with additional information? Defaults to False.}
+\item{verbose}{logical; should the acceptance rate from the ratio-of-uniforms
+method be provided along with additional information? Defaults to FALSE.}
 }
 \value{
-rtgin
+If `verbose = FALSE` (default), a numeric vector of length `size`.
+Otherwise, a list with components `value`, `avg_arate`, and `ARiters`
 }
 \description{
-Title
+Generating random numbers from the generalized inverse normal distribution truncated to the positive or negative reals
+}
+\details{
+Currently, only values of alpha > 2 are supported. For Bayesian posterior sampling,
+alpha is always larger than 2 even for non-informative priors.
+Generate from positive region (`z` > 0) hen `sign = TRUE`, and from
+negative region (`z` < 0) when `sign = FALSE`. When `verbose = TRUE`,
+a list is returned containing the actual draw in `value`, as well as average
+acceptance rate `avg_arate` and total number of acceptance-rejection steps `ARiters`.
 }
