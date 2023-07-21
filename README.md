@@ -1,7 +1,7 @@
 # Generalized Inverse Normal distribution
-The `ginormal` package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
+The `ginormal` package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $Z = 1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
 
-The GIN distribution is supported on the entire real line $(-\infty, \infty)$ and takes three parameters:
+The GIN distribution is supported on the entire real line $z \in (-\infty, \infty)$ and takes three parameters:
 - $\alpha > 1$, a degrees-of-freedom parameter,
 - $\mu \in (-\infty, \infty)$, similar to a location parameter, it shifts the density of the distribution left and right,
 - $\tau > 0$, similar to a scale parameter, it spreads the density of the distribution.
