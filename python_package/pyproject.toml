@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 # Package metadata
 [project]
 name = "ginormal"
-version = "0.0.7"
+version = "0.0.8"
 requires-python = ">=3.8"
 description = "Generalized Inverse Normal distribution density and generation"
 readme = "README.md"
