@@ -14,10 +14,10 @@ Truncated variants include a 't' in the name and require a sign argument for
 whether truncation is to the right or left of 0.
 """
 
-from gin.main import dgin
-from gin.main import dtgin
-from gin.main import rgin
-from gin.main import rtgin
+from ginormal.main import dgin
+from ginormal.main import dtgin
+from ginormal.main import rgin
+from ginormal.main import rtgin
 
 __all__ = ['dgin','dtgin','rgin','rtgin']
-__author__ = 'Santiago Montoya-Blandón, Zhilang Xia, Cheng Ding, Juan Estrada'
+__author__ = 'Santiago Montoya-Blandón, Cheng Ding, Juan Estrada, Zhilang Xia'
