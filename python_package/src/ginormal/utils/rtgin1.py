@@ -3,9 +3,9 @@ from scipy import special, stats
 from cardano_method import CubicEquation
 import warnings
 
-from intermediate import _msh as msh
-from intermediate import _dg1 as dg_1
-from intermediate import _pbd as pbd
+from ginormal.utils.mshift import mshift
+from ginormal.utils.dgin1 import dgin1
+from ginormal.utils.pbdam import pbdam
 
 def rtgin1(a, m, sign, algo='hormann', verbose=False):
     # If sign = True, draw from the positive region Z > 0
@@ -18,24 +18,19 @@ def rtgin1(a, m, sign, algo='hormann', verbose=False):
         raise ValueError("algo_method must be either 'hormann' or 'leydold'")
     
     # Compute necessary values for ratio-of-uniforms method
-    if (sign):
-        mode = (-m + np.sqrt(m ** 2 + 4 * a)) / (2 * a)
-        mult = -1
-    else:
-        mode = (-m - np.sqrt(m ** 2 + 4 * a)) / (2 * a)
-        mult = 1
+    mult = 1 - 2*sign
+    mode = (-m - mult*np.sqrt(m ** 2 + 4 * a)) / (2 * a)
     
-
     # Draw from minimal bounding rectangle and accept draw
-    vmax = msh.mshift(mode, mode, a, m, False)
+    vmax = mshift(mode, mode, a, m, False)
     if algo_1:
         # Hörmann and Leydold (2014) using Cardano method
         roots = np.real(CubicEquation([2 - a, -m + a * mode, 1 + m * mode, -mode]).answers)
         roots = roots[-mult * roots > 0]
-        uvals = np.sort([msh.mshift(roots[j], mode, a, m) for j in range(2)])
+        uvals = np.sort([mshift(roots[j], mode, a, m) for j in range(2)])
     else:
         # Leydold (2001) using the proportionality constant
-        lcons = -0.25 * m ** 2 + special.loggamma(a - 1) + np.log(pbd.pbdam(a, mult * m))
+        lcons = -0.25 * m ** 2 + special.loggamma(a - 1) + np.log(pbdam(a, mult * m))
         vp = np.exp(lcons) / vmax
         uvals = np.array([-vp, vp])
 
@@ -47,7 +42,7 @@ def rtgin1(a, m, sign, algo='hormann', verbose=False):
         u = stats.uniform.rvs(uvals[0], uvals[1] - uvals[0], size=1)[0]
         v = stats.uniform.rvs(0, vmax, size=1)[0]
         x = (u / v) + mode
-        test = (2 * np.log(v) <= dg_1.dgin1(x, a, m, True, True)) & (-mult * x > 0)
+        test = (2 * np.log(v) <= dgin1(x, a, m, True, True)) & (-mult * x > 0)
         counter += 1
         if counter > max_iter:
             x = mode
