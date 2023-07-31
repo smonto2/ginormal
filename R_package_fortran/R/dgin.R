@@ -1,4 +1,4 @@
-#' Density for the generalized inverse normal distribution
+#' Title Density for the generalized inverse normal distribution
 #'
 #' @importFrom stats runif
 #' @param z quantile.
