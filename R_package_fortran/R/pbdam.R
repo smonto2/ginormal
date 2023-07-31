@@ -9,6 +9,6 @@ library(BAS)
 #' @return pbdam
 pbdam <- function(a, z) {
   am = -a + 1
-  return(pbdv(am,z))
+  return(pbdv_r(am,z))
 }
 
