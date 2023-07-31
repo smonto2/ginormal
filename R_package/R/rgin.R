@@ -11,7 +11,7 @@
 #'
 #' @return Numeric vector of length `size`.
 #' @export rgin
-rgin <- function(size, alpha, mu, tau, algo = 'hormann'){
+rgin <- function(size, alpha, mu, tau, algo = "hormann") {
     # Check parameter values (return error)
     if (alpha <= 2) {
         stop("alpha should be greater than 2")
@@ -19,7 +19,7 @@ rgin <- function(size, alpha, mu, tau, algo = 'hormann'){
     if (tau <= 0) {
         stop("tau should be greater than 0")
     }
-    if ((algo != 'hormann') && (algo != 'leydold')) {
+    if ((algo != "hormann") && (algo != "leydold")) {
         stop("algo should be either 'hormann' or 'leydold'")
     }
 

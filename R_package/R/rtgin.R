@@ -18,7 +18,7 @@
 #' @return If `verbose = FALSE` (default), a numeric vector of length `size`.
 #' Otherwise, a list with components `value`, `avg_arate`, and `ARiters`
 #' @export rtgin
-rtgin <- function(size, alpha, mu, tau, sign, algo, verbose=FALSE) {
+rtgin <- function(size, alpha, mu, tau, sign, algo = "hormann", verbose = FALSE) {
     # Check parameter values (return error)
     if (alpha <= 2) {
         stop("alpha should be greater than 2")

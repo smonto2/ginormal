@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgin.R
 \name{dgin}
 \alias{dgin}
-\title{Density for the generalized inverse normal distribution}
+\title{Title Density for the generalized inverse normal distribution}
 \usage{
 dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)
 }
@@ -23,7 +23,7 @@ dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)
 Numeric scalar with density.
 }
 \description{
-Density for the generalized inverse normal distribution
+Title Density for the generalized inverse normal distribution
 }
 \details{
 Currently, only scalars are supported for the quantile and parameter values.

@@ -1,4 +1,4 @@
-rtgin1 <- function(a, m, sign, algo='hormann', verbose=FALSE){
+rtgin1 <- function(a, m, sign, algo = 'hormann', verbose = FALSE){
   # If sign = True, draw from the positive region Z > 0
   # If sign = False, draw from the negative region Z < 0
   # Compute necessary values for ratio-of-uniforms method

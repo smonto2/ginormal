@@ -10,19 +10,21 @@ t1 <- 1
 t2 <- 2
 
 # Choose the configuration of values you want to plot
+n_draws <- 200
 a <- a2
 m <- m1
 t <- t1
-z_vals <- seq(-5, 5, length.out=200)
-fz_unc <- sapply(z_vals, function(z) dgin(z, a, m, t, FALSE)) #'saaply' means apply this funcion to every element in the seq.
-fz_p <- sapply(z_vals, function(z) dtgin(z, a, m, t, TRUE, FALSE))
-fz_p[is.infinite(fz_p)] <- 0
-fz_n <- sapply(z_vals, function(z) dtgin(z, a, m, t, FALSE, FALSE))
-fz_n[is.infinite(fz_n)] <- 0
-z_unc <- rgin(n_draws, a, m, t, TRUE)
-z_p <- rtgin(n_draws, a, m, t, TRUE, TRUE)
-z_n <- rtgin(n_draws, a, m, t, TRUE, FALSE)
+z_vals <- seq(-5, 5, length.out = n_draws)
+fz_unc <- sapply(z_vals, function(z) dgin(z, a, m, t, FALSE))
+fz_p <- sapply(z_vals[z_vals > 0], function(z) dtgin(z, a, m, t, TRUE, FALSE))
+fz_p <- c(rep(0, n_draws - sum(z_vals > 0)), fz_p)
+fz_n <- sapply(z_vals[z_vals < 0], function(z) dtgin(z, a, m, t, FALSE, FALSE))
+fz_n <- c(fz_n, rep(0, n_draws - sum(z_vals < 0)))
+z_unc <- rgin(n_draws, a, m, t)
+z_p <- rtgin(n_draws, a, m, t, TRUE)
+z_n <- rtgin(n_draws, a, m, t, FALSE)
 
 # Full density on real line
-hist(z_unc, breaks = 100, freq = FALSE,xlim = range(z_vals),ylim = c(0, 1.2), border = NA,col = "blue",main = "",xlab = "", ylab = "") #FALSE means density not frequency
+hist(z_unc, breaks = 50, freq = FALSE, xlim = range(z_vals),
+     col = "blue", main = "", xlab = "Values", ylab = "Density") #FALSE means density not frequency
 lines(z_vals, fz_unc, col = "red") #we can add type='l'(line) or type='p'(point)
