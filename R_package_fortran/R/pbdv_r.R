@@ -1,22 +1,10 @@
-path <- system.file(package="Gin")
-#path <- getwd()
-compile_fortran <- function() {
-  fortran_file_path <- paste0(path, "./src/fortfuncsf.f90")
-  shared_object_path <- paste0(path, "./src/fortfuncs.so")
-  system(paste("gfortran -fpic -shared", fortran_file_path, "-o", shared_object_path))
-}
-# Call the function to compile the Fortran code
-compile_fortran()
-#setwd(path)
-dyn.load("./src/fortfuncs.so")
-#' Title
-#'
+#' title
+#' @useDynLib GinFortran, .registration = TRUE
 #' @param v ij
 #' @param x ii
 #'
-#' @return pbdv(v,x)
-#' @export
-pbdv <- function(v, x) {
+#' @return pbdv_r(v,x)
+pbdv_r <- function(v, x) {
   v <- as.double(v)
   x <- as.double(x)
   dv <- as.double(rep(0, 100))  # initialize an output array
