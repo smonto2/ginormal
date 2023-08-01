@@ -1,3 +1,14 @@
+#' Internal function
+#'
+#' This is an internal function that adds two numbers.
+#'
+#' @param a  a degrees-of-freedom parameter
+#' @param m A single numeric value.
+#' @param sign default
+#' @param algo default TRUE
+#' @param verbose default FALSE
+#' @return rtgin1
+#'
 rtgin1 <- function(a, m, sign, algo='hormann', verbose=FALSE){
   # If sign = True, draw from the positive region Z > 0
   # If sign = False, draw from the negative region Z < 0
@@ -25,12 +36,16 @@ rtgin1 <- function(a, m, sign, algo='hormann', verbose=FALSE){
     # Hörmann and Leydold (2014) using Cardano method
     R <- polyroot(c(-mode, 1 + m * mode, -m + a * mode, 2 - a))
     roots <- Re(R)   #real part
-    roots <- roots[(-mult*roots) > 0]
-    uvals <- sapply(roots, mshift, mode = mode, a = a, m = m, shift = TRUE)
-    uvals <- sort(uvals)
+    roots <- roots[-mult * roots > 0]
+    uva <- numeric()
+    for(j in 1:2){
+      new_root <- mshift(roots[j], mode, a, m, TRUE)
+      uva <- append(uva, new_root)
+    }
+    uvals <- sort(uva)
   } else {
     # Leydold (2001) using the proportionality constant
-    lcons <- -0.25 * m ^ 2 + lgamma(a - 1) + log(pbdam(a, mult * m))
+    lcons <- -0.25 * m ** 2 + log(gamma(a - 1)) + log(pbdam(a, mult * m))
     vp <- exp(lcons) / vmax
     uvals <- c(-vp, vp)
   }
