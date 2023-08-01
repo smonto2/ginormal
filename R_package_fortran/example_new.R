@@ -1,5 +1,6 @@
 # Try it! Let's plot the true pdf and the sampled histogram for many draws
 # Set-up with suitable parameter values
+library(GinFortran)
 n_draws <- 1000
 a1 <- 2.5
 a2 <- 5
