@@ -7,15 +7,15 @@
 mshift(z, mode, a, m, shift = TRUE)
 }
 \arguments{
-\item{z}{2}
+\item{z}{quantile}
 
-\item{mode}{3}
+\item{mode}{?}
 
 \item{a}{a degrees-of-freedom parameter}
 
-\item{m}{3}
+\item{m}{similar to location parameter, controls asymmetry of the distribution.}
 
-\item{shift}{3}
+\item{shift}{?}
 }
 \value{
 mshift

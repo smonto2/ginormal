@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgin.R
 \name{dgin}
 \alias{dgin}
-\title{Density for the generalized inverse normal distribution}
+\title{Title Density for the generalized inverse normal distribution}
 \usage{
 dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)
 }
@@ -23,7 +23,7 @@ dgin(z, alpha, mu, tau, log = TRUE, quasi = FALSE)
 Numeric scalar with density.
 }
 \description{
-Density for the generalized inverse normal distribution
+Title Density for the generalized inverse normal distribution
 }
 \details{
 Currently, only scalars are supported for the quantile and parameter values.
@@ -32,4 +32,7 @@ in $(-\\infty, \\infty)$. Density is only defined for parameter values
 `alpha`${} > 1$ or `tau`${} > 0$, so it is set to 0 outside of these values.
 The quasi-density or kernel is the density without the normalization constant,
 use `quasi = TRUE` for this behavior.
+}
+\examples{
+dgin(1, 3, 1, 1, log=TRUE, quasi=FALSE) # This should return -1.073059
 }

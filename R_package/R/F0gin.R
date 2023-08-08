@@ -1,12 +1,14 @@
-# CDF of generalized inverse normal at 0
-#' Internal function
-#' This is an internal function that adds two numbers.
+#' Probability of truncation region for truncated GIN distribution
+#'
 #' @importFrom BAS hypergeometric1F1
-#' @param a  a degrees-of-freedom parameter
-#' @param m A single numeric value.
-#' @param t parameter
-#' @param sign default TRUE
+#' @param a degrees-of-freedom parameter.
+#' @param m location parameter.
+#' @param t shape parameter.
+#' @param sign logical. `TRUE` implies truncation to positive numbers (`z` > 0)
+#' and `FALSE` to negative numbers (`z` < 0)
 #' @return F0gin
+#'
+#' @noRd
 F0gin <- function(a, m, t, sign=TRUE){
   mult = 1 - 2 * sign
   mt = m / t

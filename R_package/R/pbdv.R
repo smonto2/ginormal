@@ -1,13 +1,15 @@
-# Input:   x --- Argument of Dv(x)；v --- Order of Dv(x)
-#Output:  DV() --- Dn+v0(x)；DP() --- Dn+v0'(x)；(  = |n|, v0 = v-n, |v0| < 1,Cn = 0,±1,±2,… )
-#PDF --- Dv(x)
-#PDD --- Dv'(x)
-#' Title
+#' Parabolic cylinder function in the notation of Whittaker
 #'
-#' @param v intermediate function's parameter
-#' @param x intermediate function's parameter
+#' @param v order.
+#' @param x argument.
+#' @return Scalar with parabolic cylinder function of order v evaluated at x.
+#' @details
+#' This is an R translation of the PBDV Fortran subroutine provided in the
+#' SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
+#' Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
+#' Function can also produce derivatives of a given order, but this is not used.
 #'
-#' @return pbdv
+#' @noRd
 pbdv <- function(v, x){
   xa <- abs(x)
   dv <- as.numeric(list())

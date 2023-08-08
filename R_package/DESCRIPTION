@@ -18,3 +18,4 @@ Encoding: UTF-8
 Imports: BAS
 Suggests:
 RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

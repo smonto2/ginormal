@@ -4,7 +4,16 @@
 \alias{dtgin}
 \title{Density for the generalized inverse normal distribution truncated to the positive or negative reals}
 \usage{
-dtgin(z, alpha, mu, tau, sign = TRUE, log = TRUE, quasi = FALSE)
+dtgin(
+  z,
+  alpha,
+  mu,
+  tau,
+  sign = TRUE,
+  log = TRUE,
+  quasi = FALSE,
+  method = "Fortran"
+)
 }
 \arguments{
 \item{z}{quantile.}
@@ -21,6 +30,8 @@ and `FALSE` to negative numbers (`z` < 0)}
 \item{log}{logical; should the log of the density be returned? Defaults to TRUE.}
 
 \item{quasi}{logical; should the quasi-density value be returned? Defaults to FALSE.}
+
+\item{method}{two ways to calculate pbdv}
 }
 \value{
 Numeric scalar with density.

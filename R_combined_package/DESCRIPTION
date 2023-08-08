@@ -1,4 +1,4 @@
-Package: GinFortran
+Package: GinR
 Type: Package
 BuildResaveData: no
 Title: Generalized Inverse Normal (GIN) distribution

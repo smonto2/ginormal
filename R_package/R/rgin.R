@@ -11,15 +11,27 @@
 #'
 #' @return Numeric vector of length `size`.
 #' @export rgin
-rgin <- function(size, alpha, mu, tau, algo = "hormann") {
+#'
+#' @examples
+#' # Generate 200 values from the distribution with alpha = 5, mu = 0, tau = 1
+#' n_draws <- 200
+#' z_unc <- rgin(n_draws, 5, 0, 1)
+#' hist(z_unc, breaks = 50, freq = FALSE, xlim = c(-5, 5),
+#'      main = '', xlab = 'Values', ylab = 'Density', col = 'blue')
+#'
+#' # Compare to true density
+#' z_vals <- seq(-5, 5, length.out = n_draws)
+#' fz_unc <- sapply(z_vals, function(z) dgin(z, 5, 0, 1, FALSE))
+#' lines(z_vals, fz_unc, col = 'red', lwd = 2)
+rgin <- function(size, alpha, mu, tau, algo = 'hormann') {
     # Check parameter values (return error)
     if (alpha <= 2) {
-        stop("alpha should be greater than 2")
+        stop('alpha should be greater than 2')
     }
     if (tau <= 0) {
-        stop("tau should be greater than 0")
+        stop('tau should be greater than 0')
     }
-    if ((algo != "hormann") && (algo != "leydold")) {
+    if ((algo != 'hormann') && (algo != 'leydold')) {
         stop("algo should be either 'hormann' or 'leydold'")
     }
 

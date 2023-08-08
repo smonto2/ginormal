@@ -4,12 +4,14 @@
 \alias{pbdam}
 \title{Internal function}
 \usage{
-pbdam(a, z)
+pbdam(a, z, method)
 }
 \arguments{
 \item{a}{a degrees-of-freedom parameter}
 
 \item{z}{A single numeric value.}
+
+\item{method}{two ways to calculate pbdv}
 }
 \value{
 pbdam

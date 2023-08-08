@@ -1,14 +1,12 @@
-#' Parabolic cylinder function for large arguments
+#Input:   x  --- Argument；va --- Order
+#Output:  PD --- Dv(x)
+
+#' Title
 #'
-#' @param va order.
-#' @param x argument.
-#' @return Scalar with parabolic cylinder function of order va evaluated at x.
-#' @details
-#' This is an R translation of the DVLA Fortran subroutine provided in the
-#' SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
-#' Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
+#' @param va intermediate function's parameter
+#' @param x intermediate function's parameter
 #'
-#' @noRd
+#' @return dvla
 dvla <- function(va, x) {
   pi <- 3.141592653589793
   eps <- 1.0e-12

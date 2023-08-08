@@ -1,8 +1,8 @@
-#' Standardized generalized inverse normal density setting tau = 1
+#' Generalized inverse normal (log) density
+#' Standardized density setting tau = 1
 #' Internal function
 #' @inheritParams dgin
-#' @return Numeric scalar with density.
-#' @noRd
+#' @return dgin1
 dgin1 <- function(z, alpha, mu, log=TRUE, quasi=FALSE){
   if (z == 0 || alpha <= 1) {
     res = -Inf
@@ -24,10 +24,4 @@ dgin1 <- function(z, alpha, mu, log=TRUE, quasi=FALSE){
     return(exp(res))
   }
 }
-
-
-
-
-
-
 

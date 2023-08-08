@@ -1,12 +1,11 @@
-# Truncated generalized inverse normal log-densities
+#' Transformation of the PBDV function for use in the GIN distribution
+#'
+#' @param a degrees-of-freedom parameter.
+#' @param z argument for the parabolyc cylinder function.
+#' @return Modified parabolyc cylinder function.
+#'
+#' @noRd
 library(BAS)
-#' Internal function
-#'
-#' This is an internal function that adds two numbers.
-#'
-#' @param a  a degrees-of-freedom parameter
-#' @param z A single numeric value.
-#' @return pbdam
 pbdam <- function(a, z) {
   am = -a + 1
   return(pbdv(am,z))

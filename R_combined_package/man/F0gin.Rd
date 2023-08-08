@@ -5,7 +5,7 @@
 \title{Internal function
 This is an internal function that adds two numbers.}
 \usage{
-F0gin(a, m, t, sign = TRUE)
+F0gin(a, m, t, sign = TRUE, method = "Fortran")
 }
 \arguments{
 \item{a}{a degrees-of-freedom parameter}
@@ -15,6 +15,8 @@ F0gin(a, m, t, sign = TRUE)
 \item{t}{parameter}
 
 \item{sign}{default TRUE}
+
+\item{method}{two ways to calculate pbdv}
 }
 \value{
 F0gin

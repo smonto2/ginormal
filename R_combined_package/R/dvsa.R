@@ -1,14 +1,12 @@
-#' Parabolic cylinder function for small arguments
+#Input:   x  --- Argument；va --- Order
+#Output:  PD --- Dv(x)
+
+#' Title
 #'
-#' @param va order.
-#' @param x argument.
-#' @return Scalar with parabolic cylinder function of order va evaluated at x.
-#' @details
-#' This is an R translation of the DVSA Fortran subroutine provided in the
-#' SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
-#' Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
+#' @param va intermediate parameters
+#' @param x intermediate parameters
 #'
-#' @noRd
+#' @return dvsa
 dvsa <- function(va,x) {
   eps <- 1.0e-15
   sq2 <- sqrt(2.0)

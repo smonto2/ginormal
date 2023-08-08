@@ -14,6 +14,31 @@
 #'
 #' @return Numeric scalar with density.
 #' @export dtgin
+#'
+#' @examples
+#' # Computing (log) truncated densities
+#' dtgin(z = 1, alpha = 3, mu = 1, tau = 1, sign = TRUE, log = TRUE, quasi = FALSE)
+#' dtgin(z = -1, alpha = 3, mu = -1, tau = 1, sign = FALSE, log = TRUE, quasi = FALSE)
+#'
+#' # Generalized inverse normal density with alpha = 5, mu = 0, tau = 1
+#' n_draws <- 200
+#' z_vals <- seq(-5, 5, length.out = n_draws)
+#'
+#' # Truncated to positive reals (z > 0)
+#' fz_p <- sapply(z_vals[z_vals > 0], function(z) dtgin(z, 5, 0, 1, TRUE, FALSE))
+#' fz_p <- c(rep(0, n_draws - sum(z_vals > 0)), fz_p)
+#' plot(z_vals, fz_p, type = "l", xlab = 'Values', ylab = 'Density')
+#'
+#' # Truncated to positive reals (z < 0)
+#' fz_n <- sapply(z_vals[z_vals < 0], function(z) dtgin(z, 5, 0, 1, FALSE, FALSE))
+#' fz_n <- c(fz_n, rep(0, n_draws - sum(z_vals < 0)))
+#' plot(z_vals, fz_p, type = "l", xlab = 'Values', ylab = 'Density')
+#'
+#' # Both truncated densities together
+#' plot(z_vals, fz_p, type = "l", xlab = 'Values', ylab = 'Density')
+#' lines(z_vals, fz_n, col = 'blue', lty = 2)
+#' legend('topright', legend = c('z > 0', 'z < 0'),
+#'        col = c('black', 'blue'), lty = 1:2)
 dtgin <- function(z, alpha, mu, tau, sign=TRUE, log=TRUE, quasi=FALSE){
     # Check parameter values
     if (alpha <= 1) {

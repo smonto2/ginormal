@@ -4,7 +4,7 @@
 \alias{rtgin}
 \title{Generating random numbers from the generalized inverse normal distribution truncated to the positive or negative reals}
 \usage{
-rtgin(size, alpha, mu, tau, sign, algo, verbose = FALSE)
+rtgin(size, alpha, mu, tau, sign, algo = "hormann", verbose = FALSE)
 }
 \arguments{
 \item{size}{number of desired draws. Output is numpy vector of length equal to size)}

@@ -1,15 +1,14 @@
-# Generator of truncated generalized inverse normal variables
-#' Internal function
+#' Apply mode shift for use in random variable generation.
 #'
-#' This is an internal function that adds two numbers.
+#' @param z quantile.
+#' @param a degrees-of-freedom parameter.
+#' @param m location parameter.
+#' @param shift logical; should the argument be shifted by multiplying by
+#' `z` minus the mode
 #'
-#' @param z 2
-#' @param mode 3
-#' @param m 3
-#' @param shift 3
-#' @param a  a degrees-of-freedom parameter
+#' @return Shifted square root of the kernel.
 #'
-#' @return mshift
+#' @noRd
 mshift <- function(z, mode, a, m, shift=TRUE){
   if (shift){
     x = z - mode
