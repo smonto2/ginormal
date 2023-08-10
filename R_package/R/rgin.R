@@ -4,10 +4,10 @@
 #' @details
 #' Currently, only values of alpha > 2 are supported. For Bayesian posterior sampling,
 #' alpha is always larger than 2 even for non-informative priors. The algorithm requires
-#' calculating the probability of truncation region (either z < 0 or z > 0). It is more stable
-#' to compute a probability bounded away from 0. As mu controls asymmetry,
-#' when mu > 0, P(truncation region) = P(z>0) >= 50%, and this probability is computed.
-#' If mu < 0, P(z<0) >= 50% and this region's probability is used.
+#' calculating the probability associated to the truncation region. As mu controls asymmetry,
+#' when mu > 0, P(truncation region) = P(z>0) >= 50%, and this probability is computed
+#' (better stability in computing a probability bounded away from 0). If mu < 0,
+#' P(z<0) >= 50%, and this region's probability is used.
 #'
 #' @return Numeric vector of length `size`.
 #' @export rgin
