@@ -7,7 +7,7 @@
 #' @noRd
 library(BAS)
 pbdam <- function(a, z) {
-  am = -a + 1
+  am <- -a + 1
   return(pbdv(am,z))
 }
 

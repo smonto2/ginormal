@@ -1,0 +1,21 @@
+Package: ginormal
+Type: Package
+Title: Generalized Inverse Normal Distribution Density and Generation
+Version: 0.0.1
+Description: Density function and generation of random variables from the
+	Generalized Inverse Normal (GIN) distribution. Also provides density functions and
+	generation from the GIN distribution truncated to positive or negative reals.
+Authors@R: c(
+  person("Santiago", "Montoya-Bland\u00F3n", email = "Santiago.Montoya-Blandon@glasgow.ac.uk", role = c("cre", "aut"), comment = c(ORCID = "0000-0003-2229-2254")),
+  person("Cheng", "Ding", email = "cheng.ding.emory@gmail.com", role = "aut"),
+	person("Juan", "Estrada", email = "jjestra@emory.edu", role = "aut"),
+	person("Zhilang", "Xia", email = "zhilang.xia@glasgow.ac.uk", role = "ctb"))
+URL: https://github.com/smonto2/GIN
+BugReports: https://github.com/smonto2/GIN/issues
+License: GPL (>= 3)
+Depends: R (>= 3.5.0)
+Encoding: UTF-8
+Imports: BAS
+Suggests:
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

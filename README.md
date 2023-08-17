@@ -10,6 +10,15 @@ The GIN distribution is supported on the entire real line $z \in (-\infty, \inft
 
 This package is the first to provide an efficient sampling algorithm for drawing from the GIN distribution. We provide similar routines for the GIN distribution truncated to the positive or negative reals. Further details of the distribution, theoretical guarantees and pseudo-code for the sampling algorithms, as well as an application to Bayesian estimation of network formation models can be found in [Ding, Estrada and Montoya-Blandón (2023)](#1).
 
+## Installation
+
+# Python installation
+
+To install the package for use in Python, enter the following command to a terminal:
+```
+python -m pip install ginormal
+```
+
 ## Routines
 
 Provided with the package are four main routines:
