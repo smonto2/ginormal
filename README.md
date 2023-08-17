@@ -12,11 +12,24 @@ This package is the first to provide an efficient sampling algorithm for drawing
 
 ## Installation
 
-# Python installation
+### Python installation
 
 To install the package for use in Python, enter the following command to a terminal:
 ```
 python -m pip install ginormal
+```
+
+### R installation
+
+The package is hosted on the R repository [CRAN](https://cran.r-project.org/package=ginormal). To install, type from within `R`:
+```
+install.packages("ginormal")
+```
+As an additional option, you could install directly from the GitHub repository. To do so from within `R`, first install the `devtools` package and then type:
+```
+# install.packages("devtools") # if devtools not installed
+library(devtools)
+install_github(repo = "smonto2/GIN", subdir = "R_fortran_package", ref = "main")
 ```
 
 ## Routines
