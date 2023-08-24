@@ -1,17 +1,17 @@
 Package: ginormal
 Type: Package
 Title: Generalized Inverse Normal Distribution Density and Generation
-Version: 0.0.1
-Description: Density function and generation of random variables from the
-	Generalized Inverse Normal (GIN) distribution. Also provides density functions and
-	generation from the GIN distribution truncated to positive or negative reals.
+Version: 0.0.2
+Description: Density function and generation of random variables from the Generalized Inverse Normal (GIN) distribution from Robert (1991) <doi:10.1016/0167-7152(91)90174-P>. Also provides density functions and generation from the GIN distribution truncated to positive or negative reals. Theoretical guarantees supporting the sampling algorithms and an application to Bayesian estimation of network formation models can be found in the working paper Ding, Estrada and Montoya-Blandón (2023) <https://www.smontoyablandon.com/publication/networks/network_externalities.pdf>.
 Authors@R: c(
-    person("Santiago", "Montoya-Bland\u00F3n", email = "Santiago.Montoya-Blandon@glasgow.ac.uk", role = c("cre", "aut"), comment = c(ORCID = "0000-0003-2229-2254")),
-    person("Cheng", "Ding", email = "cheng.ding.emory@gmail.com", role = "aut"),
-	person("Juan", "Estrada", email = "jjestra@emory.edu", role = "aut"),
-	person("Zhilang", "Xia", email = "zhilang.xia@glasgow.ac.uk", role = "ctb"))
-URL: https://github.com/smonto2/GIN
-BugReports: https://github.com/smonto2/GIN/issues
+  person("Santiago", "Montoya-Bland\u00F3n", email = "Santiago.Montoya-Blandon@glasgow.ac.uk", role = c("cre", "aut"), comment = c(ORCID = "0000-0003-2229-2254")),
+  person("Cheng", "Ding", email = "cheng.ding.emory@gmail.com", role = "aut"),
+	person("Juan", "Estrada", email = "jjestra@emory.edu", role = "aut", comment = c(ORCID = "0000-0003-0070-7586")),
+	person("Zhilang", "Xia", email = "zhilang.xia@glasgow.ac.uk", role = "aut"),
+	person("Shanjie", "Zhang", role = "ctb"),
+	person("Jianming", "Jin", role = "ctb"))
+URL: https://github.com/smonto2/ginormal
+BugReports: https://github.com/smonto2/ginormal/issues
 License: GPL (>= 3)
 Depends: R (>= 3.5.0)
 Encoding: UTF-8

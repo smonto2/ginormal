@@ -7,7 +7,7 @@
 rgin(size, alpha, mu, tau, algo = "hormann", method = "Fortran")
 }
 \arguments{
-\item{size}{number of desired draws. Output is numpy vector of length equal to size)}
+\item{size}{number of desired draws. Output is numpy vector of length equal to size.}
 
 \item{alpha}{degrees-of-freedom parameter.}
 
@@ -20,7 +20,7 @@ If "hormann", use the method from Hörmann and Leydold (2014). When "leydold", u
 Defaults to "hormann" and returns an error for any other values.}
 
 \item{method}{string with the method used to compute the parabolic cylinder function
-used in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
+in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
 which is the default. \code{method = "R"} uses an R translation of this function.}
 }
 \value{
@@ -36,13 +36,10 @@ calculating the probability of truncation region (either \code{z} < 0 or \code{z
 It is more stable to compute a probability bounded away from 0. As \code{mu} controls asymmetry,
 when \code{mu} > 0, P(truncation region) = P(\code{z} > 0) >= 50\%, and this probability is computed.
 If \code{mu} < 0, P(\code{z} < 0) >= 50\% and this region's probability is used.
-This function uses the PBDV Fortran subroutine provided in the
-SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
-Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
 }
 \examples{
 # Generate 1000 values from the distribution with alpha = 5, mu = 0, tau = 1
-\dontrun{set.seed(123456)}
+set.seed(123456)
 z_unc <- rgin(1000, 5, 0, 1)
 
 # Compare histogram to true density

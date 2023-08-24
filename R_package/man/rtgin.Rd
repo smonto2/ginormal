@@ -16,7 +16,7 @@ rtgin(
 )
 }
 \arguments{
-\item{size}{number of desired draws. Output is numpy vector of length equal to size)}
+\item{size}{number of desired draws. Output is numpy vector of length equal to size.}
 
 \item{alpha}{degrees-of-freedom parameter.}
 
@@ -25,14 +25,14 @@ rtgin(
 \item{tau}{similar to scale parameter, controls spread of the distribution.}
 
 \item{sign}{logical. \code{TRUE} implies truncation to positive numbers (\code{z} > 0)
-and \code{FALSE} to negative numbers (\code{z} < 0)}
+and \code{FALSE} to negative numbers (\code{z} < 0).}
 
 \item{algo}{string with desired algorithm to compute minimal bounding rectangle.
 If "hormann", use the method from Hörmann and Leydold (2014). When "leydold", use the one from Leydold (2001).
 Defaults to "hormann" and returns an error for any other values.}
 
 \item{method}{string with the method used to compute the parabolic cylinder function
-used in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
+in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
 which is the default. \code{method = "R"} uses an R translation of this function.}
 
 \item{verbose}{logical; should the acceptance rate from the ratio-of-uniforms
@@ -52,13 +52,10 @@ Generate from positive region (\code{z} > 0) hen \code{sign = TRUE}, and from
 negative region (\code{z} < 0) when \code{sign = FALSE}. When \code{verbose = TRUE},
 a list is returned containing the actual draw in \code{value}, as well as average
 acceptance rate \code{avg_arate} and total number of acceptance-rejection steps \code{ARiters}.
-This function uses the PBDV Fortran subroutine provided in the
-SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
-Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
 }
 \examples{
 # Generate 1000 values from the truncated distributions with alpha = 5, mu = 0, tau = 1
-\dontrun{set.seed(123456)}
+set.seed(123456)
 n_draws <- 1000
 z_p <- rtgin(n_draws, 5, 0, 1, TRUE)
 z_n <- rtgin(n_draws, 5, 0, 1, FALSE)

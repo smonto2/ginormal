@@ -10,8 +10,8 @@
 #' @details
 #' Currently, only scalars are supported for the quantile and parameter values.
 #' Density is supported on the entire real line, `z` and `mu` can take any value
-#' in $(-\\infty, \\infty)$. Density is only defined for parameter values
-#' `alpha`${} > 1$ or `tau`${} > 0$, so it is set to 0 outside of these values.
+#' in \eqn{(-\infty, \infty)}. Density is only defined for parameter values
+#' `alpha` > 1 or `tau` > 0, so it is set to 0 outside of these values.
 #' The quasi-density or kernel is the density without the normalization constant,
 #' use `quasi = TRUE` for this behavior.
 #'
@@ -29,27 +29,27 @@
 dgin <- function(z, alpha, mu, tau, log=TRUE, quasi=FALSE){
   # Check parameter values
   if (alpha <= 1) {
-      warning("alpha should be greater than 1")
-      res <- -Inf
+    warning("alpha should be greater than 1")
+    res <- -Inf
   } else if (tau <= 0) {
-      warning("tau should be greater than 0")
-      res <- -Inf
+    warning("tau should be greater than 0")
+    res <- -Inf
   } else if (z == 0) {
-      res <- -Inf
+    res <- -Inf
   } else {
-      # Compute density
-      mt <- mu / tau
-      if (quasi == TRUE){
-          res <- dgin1(z * tau, alpha, mt, TRUE, TRUE) + alpha * log(tau)
-      } else {
-          res <- dgin1(z * tau, alpha, mt, TRUE, FALSE) + log(tau)
-      }
+    # Compute density
+    mt <- mu / tau
+    if (quasi){
+      res <- dgin1(z * tau, alpha, mt, TRUE, TRUE) + alpha * log(tau)
+    } else {
+      res <- dgin1(z * tau, alpha, mt, TRUE, FALSE) + log(tau)
+    }
   }
 
   # Return
-  if (log == TRUE){
-      return(res)
+  if (log) {
+    return(res)
   } else {
-      return(exp(res))
+    return(exp(res))
   }
 }

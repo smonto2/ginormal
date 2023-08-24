@@ -25,14 +25,14 @@ dtgin(
 \item{tau}{similar to scale parameter, controls spread of the distribution.}
 
 \item{sign}{logical. \code{TRUE} implies truncation to positive numbers (\code{z} > 0)
-and \code{FALSE} to negative numbers (\code{z} < 0)}
+and \code{FALSE} to negative numbers (\code{z} < 0).}
 
 \item{log}{logical; should the log of the density be returned? Defaults to TRUE.}
 
 \item{quasi}{logical; should the quasi-density value be returned? Defaults to FALSE.}
 
 \item{method}{string with the method used to compute the parabolic cylinder function
-used in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
+in the normalization constant. \code{method = "Fortran"} uses a compiled Fortran version,
 which is the default. \code{method = "R"} uses an R translation of this function.}
 }
 \value{
@@ -49,9 +49,6 @@ in \eqn{(-\infty, \infty)}. Density is only defined for parameter values
 \code{alpha} > 1 or \code{tau} > 0, so it is set to 0 outside of these values.
 The quasi-density or kernel is the density without the normalization constant,
 use \code{quasi = TRUE} for this behavior.
-This function uses the PBDV Fortran subroutine provided in the
-SPECFUN Fortran library by Shanjie Zhang and Jianming Jin in
-Computation of Special Functions, Wiley, 1996, ISBN: 0-471-11963-6, LC: QA351.C45.
 }
 \examples{
 # Computing (log) truncated densities

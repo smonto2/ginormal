@@ -9,12 +9,12 @@
 #' @return Shifted square root of the kernel.
 #'
 #' @noRd
-mshift <- function(z, mode, alpha, mu, shift = TRUE){
-  if (shift) {
-    x <- z - mode
+mshift <- function(z, mode, alpha, mu, shift=TRUE){
+  if (shift){
+    x = z - mode
   }else{
-    x <- 1
+    x = 1
   }
 
-  return(x * sqrt(dgin1(z, alpha, mu, FALSE, TRUE)))
+  return(x * sqrt(dgin1(z, a, m, FALSE, TRUE)))
 }

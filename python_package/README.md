@@ -1,3 +1,5 @@
+![Density and draws from GIN(5,0,1) distribution](/static/GIN.png?raw=true "Density and draws from GIN(5,0,1) distribution")
+
 # Generalized Inverse Normal distribution
 The `ginormal` package provides the density function and random variable generation from the generalized inverse normal (GIN) distribution introduced by [Robert (1991)](#2). The GIN distribution is a way to generalize the distribution of the reciprocal of a normal random variable. That is, the distribution generalizes the distribution of the random variable $Z = 1/X$ where $X \sim \text{Normal}(\mu, \sigma^2)$. This distribution is *different* from the generalized inverse Gaussian (GIG) distribution [(Jørgensen, 2012)](#3) despite the similarities in naming (see [below](#digression)).
 
@@ -6,7 +8,18 @@ The GIN distribution is supported on the entire real line $z \in (-\infty, \inft
 - $\mu \in (-\infty, \infty)$, similar to a location parameter, it shifts the density of the distribution left and right,
 - $\tau > 0$, similar to a scale parameter, it spreads the density of the distribution.
 
-This package is the first to provide an efficient sampling algorithm for drawing from the GIN distribution. We provide similar routines for the GIN distribution truncated to the positive or negative reals. Further details of the distribution, theoretical guarantees and pseudo-code for the sampling algorithms, as well as an application to Bayesian estimation of network formation models can be found in [Ding, Estrada and Montoya-Blandón (2023)](#1).
+This package is the first to provide an efficient sampling algorithm for drawing from the GIN distribution. We provide similar routines for the GIN distribution truncated to the positive or negative reals. Further details of the distribution, theoretical guarantees and pseudo-code for the sampling algorithms, as well as an application to Bayesian estimation of network formation models can be found in the working paper [Ding, Estrada and Montoya-Blandón (2023)](#1).
+
+## Installation
+
+To install the package for use in Python, enter the following command to a terminal:
+```
+python -m pip install ginormal
+```
+
+## Examples
+
+Examples of how to use the routines are available in the [GitHub repository](https://github.com/smonto2/ginormal/blob/main/example.py).
 
 ## Routines
 
@@ -38,7 +51,7 @@ $$f_{Z^{-}}(z) = \frac{g(z; \alpha, \mu, \tau)}{C^{-}(\alpha, \mu, \tau)} \mathb
 with proportionality constants
 $$C^{-}(\alpha, \mu) = e^{-\frac{\mu^2}{4}} \Gamma(\alpha - 1) D_{-(\alpha-1)}(-\mu)$$
 $$C^{+}(\alpha, \mu) = e^{-\frac{\mu^2}{4}} \Gamma(\alpha - 1) D_{-(\alpha-1)}(\mu)$$
-where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument is true and 0 otherwise, and $D_\nu(x)$ is the [parabolic cylinder function](https://mathworld.wolfram.com/ParabolicCylinderFunction.html).
+where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument is true and 0 otherwise, and $D_\nu(x)$ is the [parabolic cylinder function](https://mathworld.wolfram.com/ParabolicCylinderFunction.html). [^1]
 
 ## Random variable generation
 
@@ -54,10 +67,13 @@ where $\mathbb{I}(\cdot)$ is the indicator function that is 1 when its argument 
 
 These are similar mixture models but carry different interpretations and thus require different posterior sampling algorithms. This interpretation also shows why the restriction of $\alpha \geq 2$ is not binding if the goal is to perform Bayesian analysis. A prior $\theta \sim \text{GIN}(\alpha_0, \mu_0, \tau_0)$ with $\alpha_0 = 1 + \varepsilon$ is non-informative when $\varepsilon > 0$ is arbitrarily small. However, the posterior distribution will have degrees-of-freedom parameter $\alpha_N = N + 1 + \varepsilon$ where $N$ is the sample size. As $N \geq 1$ implies $\alpha_N > 2$, for a conjugate Bayesian analysis we are always drawing from the GIN distribution with $\alpha > 2$.
 
+[^1]: Python implementations of both the confluent hypergeometric and parabolic cylinder functions are available in the `scipy` module. In R, package [`BAS`](https://cran.r-project.org/package=BAS) contains the confluent hypergeometric function. For the parabolic cylinder function, we use a Fortran subroutine provided in the SPECFUN library [(Zhang and Jin, 1996)](#7) and our own R translation of this function.
+
 ## References
 1. <a id="1"> [Ding, C., Estrada, J., and Montoya-Blandón, S. (2023). Bayesian Inference of Network Formation Models with Payoff Externalities. Working Paper.](https://www.smontoyablandon.com/publication/networks/network_externalities.pdf) </a>
 2. <a id="2"> [Robert, C. (1991). Generalized inverse normal distributions. Statistics & Probability Letters, 11(1), 37-41.](https://doi.org/10.1016/0167-7152%2891%2990174-P) </a>
 3. <a id="3"> [Jørgensen, B. (2012). Statistical properties of the generalized inverse Gaussian distribution (Vol. 9). Springer Science & Business Media.](https://link.springer.com/book/10.1007/978-1-4612-5698-4) </a>
-4. <a id="4"> [Kinderman, A. J., & Monahan, J. F. (1977). Computer generation of random variables using the ratio of uniform deviates. ACM Transactions on Mathematical Software (TOMS), 3(3), 257-260.](https://doi.org/10.1145/355744.355750)
+4. <a id="4"> [Kinderman, A. J., and Monahan, J. F. (1977). Computer generation of random variables using the ratio of uniform deviates. ACM Transactions on Mathematical Software (TOMS), 3(3), 257-260.](https://doi.org/10.1145/355744.355750)
 5. <a id="5"> [Leydold, J. (2001). A simple universal generator for continuous and discrete univariate T-concave distributions. ACM Transactions on Mathematical Software (TOMS), 27(1), 66-82.](https://doi.org/10.1145/382043.382322) </a>
-6. <a id="6"> [Hörmann, W., & Leydold, J. (2014). Generating generalized inverse Gaussian random variates. Statistics and Computing, 24, 547-557.](https://doi.org/10.1007/s11222-013-9387-3) </a>
+6. <a id="6"> [Hörmann, W., and Leydold, J. (2014). Generating generalized inverse Gaussian random variates. Statistics and Computing, 24, 547-557.](https://doi.org/10.1007/s11222-013-9387-3) </a>
+7. <a id="7"> Zhang, S. and Jianming, J. (1996). Computation of Special Functions, Wiley. ISBN: 0-471-11963-6, LC: QA351.C45. </a>
