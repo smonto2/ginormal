@@ -42,10 +42,10 @@ Those routines including "`t`" in their name work for the truncated variants. Th
 Let $Z \sim \text{GIN}(\alpha, \mu, \tau)$. The GIN density function is given by
 $$f_Z(z) = \frac{1}{C(\alpha, \mu, \tau)} |z|^{-\alpha}\exp\left[-\frac{1}{2\tau^2} \left( \frac{1}{z} - \mu \right)^2 \right] \equiv \frac{g(z; \alpha, \mu, \tau)}{C(\alpha, \mu, \tau)}$$
 where $g(z; \alpha, \mu, \tau)$ is the kernel or quasi-density and the proportionality constant can be written in closed form as
-```math
+$$
 C(\alpha, \mu, \tau) = (\sqrt{2} \tau)^{\alpha-1} \exp\left(- \frac{\mu^2}{2\tau^2} \right) \Gamma\left(\frac{\alpha-1}{2}\right) {}_1F_1\left(\frac{\alpha-1}{2}; \frac{1}{2}; \frac{\mu^2}{\tau^2}\right)
-```
-where $`{}_1F_1(a, b; x)`$ is the [confluent hypergeometric function](https://mathworld.wolfram.com/ConfluentHypergeometricFunctionoftheFirstKind.html). In addition to the density and generation routines for the GIN distribution, we provide similar routines for the GIN distribution truncated to positive or negative numbers. These are denoted by $\text{GIN}^{+}$ when truncated to $(0, \infty)$ and by $\text{GIN}^{-}$ when truncated to $(-\infty, 0)$. Let $Z^{+} \sim \text{GIN}^{+}(\alpha, \mu, \tau)$ and $Z^{-} \sim \text{GIN}^{-}(\alpha, \mu, \tau)$. Their densities are given by
+$$
+where ${}_1F_1(a, b; x)$ is the [confluent hypergeometric function](https://mathworld.wolfram.com/ConfluentHypergeometricFunctionoftheFirstKind.html). In addition to the density and generation routines for the GIN distribution, we provide similar routines for the GIN distribution truncated to positive or negative numbers. These are denoted by $\text{GIN}^{+}$ when truncated to $(0, \infty)$ and by $\text{GIN}^{-}$ when truncated to $(-\infty, 0)$. Let $Z^{+} \sim \text{GIN}^{+}(\alpha, \mu, \tau)$ and $Z^{-} \sim \text{GIN}^{-}(\alpha, \mu, \tau)$. Their densities are given by
 $$f_{Z^{+}}(z) = \frac{g(z; \alpha, \mu, \tau)}{C^{+}(\alpha, \mu, \tau)} \mathbb{I}(z > 0)$$
 $$f_{Z^{-}}(z) = \frac{g(z; \alpha, \mu, \tau)}{C^{-}(\alpha, \mu, \tau)} \mathbb{I}(z < 0)$$
 with proportionality constants
