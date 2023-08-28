@@ -1,15 +1,14 @@
 # Build system for the package
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
 # Package metadata
 [project]
 name = "ginormal"
-version = "0.0.9"
-requires-python = ">=3.8"
+version = "0.0.11"
 description = "Generalized Inverse Normal distribution density and generation"
-readme = "README.md"
+dynamic = ["readme"]
 authors = [
   { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" },
   { name = "Cheng Ding", email = "cheng.ding.emory@gmail.com"},
@@ -20,6 +19,7 @@ maintainers = [
   { name = "Santiago Montoya-Blandón", email = "Santiago.Montoya-Blandon@glasgow.ac.uk" }
 ]
 dependencies = ["numpy", "scipy", "cardano_method"]
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3.8", # "Programming Language" represents the top-level category, "Python" represents the second-level category, and "3.8" represents the third-level category.
 	"License :: OSI Approved :: MIT License",
@@ -31,5 +31,9 @@ keywords = ["statistics", "distribution", "generalized inverse normal", "random 
 "Homepage" = "https://github.com/smonto2/ginormal"
 "Bug tracking" = "https://github.com/smonto2/ginormal/issues"
 
-[tool.hatch.build.targets]
-packages = ["src/ginormal"]
+[tool.setuptools.dynamic]
+version = {attr = "ginormal.VERSION"}
+readme = {file = "README.md", content-type = "text/markdown"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
