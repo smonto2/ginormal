@@ -1,7 +1,7 @@
 import numpy as np
 from ginormal.utils.rtgin1 import rtgin1
 
-def rtgin(size, alpha, mu, tau, sign=True, algo='hormann', verbose=False):
+def rtgin(size, alpha, mu, tau, sign, algo='hormann', verbose=False):
     """
     Generating random numbers from the generalized inverse normal distribution
     truncated to the positive or negative reals. Currently, only values of alpha > 2 are supported.

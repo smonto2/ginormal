@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 # Package metadata
 [project]
 name = "ginormal"
-version = "0.0.8"
+version = "0.0.9"
 requires-python = ">=3.8"
 description = "Generalized Inverse Normal distribution density and generation"
 readme = "README.md"
@@ -28,8 +28,8 @@ classifiers = [
 keywords = ["statistics", "distribution", "generalized inverse normal", "random variable generation"]
 
 [project.urls]
-"Homepage" = "https://github.com/smonto2/GIN"
-"Bug tracking" = "https://github.com/smonto2/GIN/issues"
+"Homepage" = "https://github.com/smonto2/ginormal"
+"Bug tracking" = "https://github.com/smonto2/ginormal/issues"
 
 [tool.hatch.build.targets]
 packages = ["src/ginormal"]

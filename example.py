@@ -1,4 +1,3 @@
-# Try it! Let's plot the true pdf and the sampled histogram for many draws
 import ginormal as gin
 import numpy as np
 from matplotlib import pyplot as plt

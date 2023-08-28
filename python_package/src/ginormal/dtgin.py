@@ -4,7 +4,7 @@ from scipy import special
 from ginormal.utils.dgin1 import dgin1
 from ginormal.utils.pbdam import pbdam
 
-def dtgin(z, alpha, mu, tau, sign=True, log=True, quasi=False):    
+def dtgin(z, alpha, mu, tau, sign, log=True, quasi=False):    
     """
     Density for the generalized inverse normal distribution truncated to
     the positive or negative reals.
